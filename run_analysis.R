@@ -1,12 +1,3 @@
-
-if (!require("data.table")) {
-        install.packages("data.table")
-}
-
-if (!require("reshape2")) {
-        install.packages("reshape2")
-}
-
 require("data.table")
 require("reshape2")
 
@@ -25,15 +16,15 @@ X_test <- read.table("./UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table("./UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt")
 
-names(X_test) = features
+names(X_test) <- features
 
 # Extract only the measurements on the mean and standard deviation for each measurement.
-X_test = X_test[,extract_features]
+X_test <- X_test[,extract_features]
 
 # Load activity labels
-y_test[,2] = activity_labels[y_test[,1]] #lookup table
-names(y_test) = c("Activity_ID", "Activity_Label")
-names(subject_test) = "subject"
+y_test[,2] <- activity_labels[y_test[,1]] #lookup table
+names(y_test) <- c("Activity_ID", "Activity_Label")
+names(subject_test) <- "subject"
 
 # Bind data
 test_data <- cbind(as.data.table(subject_test), y_test, X_test)
